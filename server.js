@@ -2,7 +2,6 @@ const WebSocket = require("ws");
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
@@ -10,7 +9,6 @@ const wss = new WebSocket.Server({ server });
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
 
 let connectedClients = {};
 
@@ -51,11 +49,6 @@ wss.on("connection", (ws) => {
 	ws.on("close", () => {
 		console.log("Client disconnected");
 	});
-});
-
-// Default route serves index.html
-app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;

@@ -23,13 +23,14 @@ wss.on("connection", (ws) => {
 			if (!data.userId || !data.latitude || !data.longitude) return;
 
 			console.log(
-				`Location from ${data.userId}: ${data.latitude}, ${data.longitude}`
+				`Location from ${data.userId}: ${data.latitude}, ${data.longitude}, ${data.searchingAreaName}`
 			);
 
 			connectedClients[data.userId] = {
 				latitude: data.latitude,
 				longitude: data.longitude,
 				timestamp: new Date().toISOString(),
+				searchingAreaName: data.searchingAreaName,
 			};
 
 			// Broadcast updated locations

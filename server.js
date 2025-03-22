@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -79,7 +80,7 @@ wss.on("connection", (ws) => {
 	});
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || process.env.WEBSOCKET_PORT;
 server.listen(PORT, () => {
 	console.log(`WebSocket server running on ws://localhost:${PORT}`);
 });
